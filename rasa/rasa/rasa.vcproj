@@ -255,6 +255,14 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
+				RelativePath=".\res\icon1.ico"
+				>
+			</File>
+			<File
+				RelativePath=".\res\icon2.ico"
+				>
+			</File>
+			<File
 				RelativePath=".\res\rasa.ico"
 				>
 			</File>
@@ -264,6 +272,14 @@
 			</File>
 			<File
 				RelativePath=".\res\rasa.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\res\tb.ico"
+				>
+			</File>
+			<File
+				RelativePath="C:\Users\ÎÄ³¬\Desktop\tb.png"
 				>
 			</File>
 		</Filter>

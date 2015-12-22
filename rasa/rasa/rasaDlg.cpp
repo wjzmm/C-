@@ -63,7 +63,7 @@ CrasaDlg::CrasaDlg(CWnd* pParent /*=NULL*/)
 	, m_passwd(_T(""))
 	, m_regpath(_T(""))
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 }
 
 void CrasaDlg::DoDataExchange(CDataExchange* pDX)
@@ -226,9 +226,6 @@ void CrasaDlg::OnBnClickedConnect()
 	{
 		hRasConn = NULL;
 	}
-	/*Rasdial mras(RasDialParams);	
-	DWORD result = mras.rasConnect(this->m_hWnd);*/
-	Sleep(300);
 	toTray();
 	((CButton*)GetDlgItem(IDC_CONNECT))->EnableWindow(false);
 	UpdateData();
@@ -323,7 +320,7 @@ void CrasaDlg::toTray()
 	nid.uID = IDR_MAINFRAME;  
 	nid.uFlags = NIF_ICON|NIF_MESSAGE|NIF_TIP ;  
 	nid.uCallbackMessage = WM_SHOWTASK;//自定义的消息名称  
-	nid.hIcon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_MAINFRAME));  
+	nid.hIcon = LoadIcon(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDI_ICON1));  
 	_tcscpy_s(nid.szTip,_T("rasa"));//信息提示条为“校园网已连接”  
 	Shell_NotifyIcon(NIM_ADD, &nid);//在托盘区添加图标  
 	ShowWindow(SW_HIDE);//隐藏主窗口  
