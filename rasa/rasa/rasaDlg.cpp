@@ -226,8 +226,6 @@ void CrasaDlg::OnBnClickedConnect()
 	{
 		hRasConn = NULL;
 	}
-	toTray();
-	((CButton*)GetDlgItem(IDC_CONNECT))->EnableWindow(false);
 	UpdateData();
 }
 LRESULT CrasaDlg::OnRasDialEvent(WPARAM wp, LPARAM lp){
@@ -299,17 +297,53 @@ bool CrasaDlg::sendByPost(){
 	CString dt3("&ac_id=1&user_ip=&nas_ip=&user_mac=&save_me=1&ajax=1");
 	CString postData;
 	
+	
+
+	//...
+	
 	DWORD statusCode;
 	postData += (dt1 + uname + dt2 + passwd + dt3);
 	//MessageBox(postData);
-	CInternetSession * m_inernetSession = new CInternetSession();
-	CHttpConnection * m_httpConnection = m_inernetSession->GetHttpConnection( (LPCTSTR)HOST, 0, PORT, NULL, NULL);
-	CHttpFile* pFile = m_httpConnection->OpenRequest(CHttpConnection::HTTP_VERB_POST,  _T("/include/auth_action.php"));
-	CString strHeaders("Content-Type: application/x-www-form-urlencoded");
-	pFile->SendRequest(strHeaders,(LPVOID)(LPCTSTR)postData, postData.GetLength());
-	if( pFile->QueryInfoStatusCode(statusCode) && statusCode == 200){
-		return true;
+	int len =WideCharToMultiByte(CP_ACP,0,postData,-1,NULL,0,NULL,NULL);
+	char *data =new char[len +1];
+	WideCharToMultiByte(CP_ACP,0,postData,-1,data,len,NULL,NULL );
+	//char *data = (LPSTR)(LPCTSTR)postData;
+	//DWORD len = postData.GetLength();
+	//strcpy_s(data, postData);
+	//char *data = "action=login&username=dumpling&password=896953&ac_id=1&user_ip=&nas_ip=&user_mac=&save_me=1&ajax=1";
+	CInternetSession m_inernetSession(_T("Mozilla/5.0 (Windows NT 6.3; WOW64)"),
+		0,
+		INTERNET_OPEN_TYPE_PRECONFIG,
+		NULL,
+		NULL,
+		INTERNET_FLAG_DONT_CACHE); 
+	CString strHtml("hello");
+	try{
+		CHttpConnection * m_httpConnection = m_inernetSession.GetHttpConnection( (LPCTSTR)HOST, 0, PORT, NULL, NULL);
+		CHttpFile* pFile = m_httpConnection->OpenRequest(CHttpConnection::HTTP_VERB_POST,  _T("/include/auth_action.php"));
+		CString strHeaders("Content-Type: application/x-www-form-urlencoded");
+		BOOL result = pFile->SendRequest(strHeaders, (LPVOID)data, len);
+		if( pFile->QueryInfoStatusCode(statusCode) && statusCode == HTTP_STATUS_OK){
+			CString strLine;
+			while (pFile->ReadString(strLine))
+			{
+				strHtml += strLine;
+			}
+			//MessageBox(strHtml);
+			pFile->Close();
+			delete pFile;
+			m_httpConnection->Close();
+			delete m_httpConnection;
+			delete[] data;
+			return true;
+		}
+		
 	}
+	catch (CInternetException* e){
+		e->m_dwContext;
+		return false;
+	}
+	delete[] data;
 	return false;
 }
 
@@ -432,7 +466,7 @@ void CrasaDlg::OnMenuAbout()
 bool CrasaDlg::setReg()
 {
 	UpdateData(true);
-	if(m_regkey.Create(HKEY_LOCAL_MACHINE, _T("Software\\rasa\\xxx")) != ERROR_SUCCESS)
+	if(m_regkey.Create(HKEY_LOCAL_MACHINE, _T("Software\\rasa\\xyz")) != ERROR_SUCCESS)
 		MessageBox(_T("error"));
 	m_regkey.SetStringValue(queryuname, m_uname);
 	m_regkey.SetStringValue(querypwd, m_passwd);

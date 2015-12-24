@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "rasc_install", "rasc_install\rasc_install.vdproj", "{C9425B38-B612-40C6-B4ED-53C2245FE682}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rasc", "..\rasc\rasc\rasc.vcproj", "{8F8056FA-00F5-40D9-A253-86A0CF9FE12F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9425B38-B612-40C6-B4ED-53C2245FE682}.Debug|Win32.ActiveCfg = Debug
+		{C9425B38-B612-40C6-B4ED-53C2245FE682}.Debug|Win32.Build.0 = Debug
+		{C9425B38-B612-40C6-B4ED-53C2245FE682}.Release|Win32.ActiveCfg = Release
+		{C9425B38-B612-40C6-B4ED-53C2245FE682}.Release|Win32.Build.0 = Release
+		{8F8056FA-00F5-40D9-A253-86A0CF9FE12F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8F8056FA-00F5-40D9-A253-86A0CF9FE12F}.Debug|Win32.Build.0 = Debug|Win32
+		{8F8056FA-00F5-40D9-A253-86A0CF9FE12F}.Release|Win32.ActiveCfg = Release|Win32
+		{8F8056FA-00F5-40D9-A253-86A0CF9FE12F}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
